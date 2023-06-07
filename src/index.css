@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+hr {
+  width: 100%;
+}
+
+h3 {
+  margin: 0;
+}
+
+input[type='text'] {
+  flex-grow: 1;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  box-shadow: 1px 2px 4px 1px darkgray;
+  padding: 2rem;
+  width: 24rem;
+}
+
+.h-stack {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.todos {
+  gap: 0.5rem;
+}
