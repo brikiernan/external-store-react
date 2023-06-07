@@ -34,39 +34,45 @@ const Todos = () => {
       </form>
       <div className='stack todos'>
         <h3>Todos</h3>
-        {todos
-          .map(({ id, isComplete, task }) => (
-            <form className='h-stack' key={id} onSubmit={handleUpdate}>
-              <input
-                type='checkbox'
-                checked={isComplete}
-                onChange={(e) =>
-                  updateTodo(id, { isComplete: e.target.checked })
-                }
-              />
-              <input
-                type='text'
-                ref={updateRef}
-                defaultValue={task}
-                readOnly={editId !== id}
-                style={{ textDecoration: isComplete ? 'line-through' : 'none' }}
-                onBlur={() => setEditId('')}
-              />
-              {editId !== id && (
-                <button onClick={() => setEditId(id)} disabled={isComplete}>
-                  Edit
-                </button>
-              )}
-              {editId !== id && (
-                <button onClick={() => deleteTodo(id)}>Delete</button>
-              )}
-              {editId === id && (
-                <button onClick={() => setEditId('')}>Cancel</button>
-              )}
-              {editId === id && <button type='submit'>Update</button>}
-            </form>
-          ))
-          .reverse()}
+        {todos.length > 0 ? (
+          todos
+            .map(({ id, isComplete, task }) => (
+              <form className='h-stack' key={id} onSubmit={handleUpdate}>
+                <input
+                  type='checkbox'
+                  checked={isComplete}
+                  onChange={(e) =>
+                    updateTodo(id, { isComplete: e.target.checked })
+                  }
+                />
+                <input
+                  type='text'
+                  ref={updateRef}
+                  defaultValue={task}
+                  readOnly={editId !== id}
+                  style={{
+                    textDecoration: isComplete ? 'line-through' : 'none',
+                  }}
+                  onBlur={() => setEditId('')}
+                />
+                {editId !== id && (
+                  <button onClick={() => setEditId(id)} disabled={isComplete}>
+                    Edit
+                  </button>
+                )}
+                {editId !== id && (
+                  <button onClick={() => deleteTodo(id)}>Delete</button>
+                )}
+                {editId === id && (
+                  <button onClick={() => setEditId('')}>Cancel</button>
+                )}
+                {editId === id && <button type='submit'>Update</button>}
+              </form>
+            ))
+            .reverse()
+        ) : (
+          <p>Nothing todo.</p>
+        )}
       </div>
     </div>
   );
