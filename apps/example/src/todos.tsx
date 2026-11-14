@@ -1,23 +1,20 @@
-import { useRef, useState } from 'react';
-import { useActions, useSelector } from './state';
-
-const randomId = (num = 36) => Math.random().toString(num).substring(2);
+import { useRef, useState, type SubmitEvent } from 'react';
+import { addTodo, deleteTodo, updateTodo, useAppStore } from './state';
 
 const Todos = () => {
   const addRef = useRef<HTMLInputElement | null>(null);
   const updateRef = useRef<HTMLInputElement | null>(null);
-  const { addTodo, deleteTodo, updateTodo } = useActions();
-  const todos = useSelector((state) => state.todos);
+  const todos = useAppStore((state) => state.todos);
   const [editId, setEditId] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!addRef.current) return;
-    addTodo({ id: randomId(), isComplete: false, task: addRef.current.value });
+    addTodo(addRef.current.value);
     addRef.current.value = '';
   };
 
-  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdate = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!updateRef.current) return;
     updateTodo(editId, { task: updateRef.current.value });
